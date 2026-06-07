@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#ffb5c8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Happy 3 Months 💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&family=Mali:wght@400;600&family=Sarabun:ital,wght@0,300;0,400;1,300&family=Mitr:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+:root{
+  --pink:#ffb5c8;--pink2:#ff8fab;--peach:#ffd6c0;
+  --lemon:#fff4b2;--mint:#b8f0e0;--lilac:#e0c8ff;
+  --cream:#fffaf6;--white:#ffffff;
+  --text:#5a3d4a;--sub:#a07080;--accent:#ff6b9d;
+  --safe-b:env(safe-area-inset-bottom,0px);
+  --safe-t:env(safe-area-inset-top,0px);
+}
+html{height:100%;-webkit-text-size-adjust:100%;}
+body{width:100%;min-height:100%;overflow:hidden;font-family:'Mitr',sans-serif;background:#0a0510;color:var(--text);touch-action:manipulation;}
+
+/* ══ STARFIELD ══ */
+#starfield{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.star{position:absolute;border-radius:50%;background:#fff;animation:twinkle linear infinite;}
+@keyframes twinkle{0%,100%{opacity:.1;transform:scale(.6);}50%{opacity:1;transform:scale(1);}}
+.meteor{position:absolute;width:2px;height:80px;background:linear-gradient(180deg,rgba(255,255,255,0),#fff,rgba(255,255,255,0));border-radius:2px;opacity:0;animation:shootStar linear infinite;}
+@keyframes shootStar{0%{opacity:0;transform:translateY(-80px) rotate(30deg);}5%{opacity:1;}60%{opacity:.4;}100%{opacity:0;transform:translateY(110vh) rotate(30deg);}}
+
+/* ══ PETALS ══ */
+#petals{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden;}
+.petal{position:absolute;opacity:0;animation:petalDrift linear infinite;}
+@keyframes petalDrift{0%{transform:translateY(0) translateX(0) rotate(0deg);opacity:0;}5%{opacity:.7;}90%{opacity:.3;}100%{transform:translateY(-105vh) translateX(40px) rotate(540deg);opacity:0;}}
+
+/* ══ MUSIC BTN ══ */
+#music-btn{position:fixed;top:max(16px,var(--safe-t));right:16px;z-index:1000;width:46px;height:46px;border-radius:50%;border:1.5px solid rgba(255,181,200,.5);background:rgba(255,255,255,.12);backdrop-filter:blur(12px);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(255,107,157,.25);transition:transform .15s;-webkit-user-select:none;user-select:none;}
+#music-btn:active{transform:scale(.9);}
+#music-btn.playing{animation:musicPulse 1.5s ease-in-out infinite;}
+@keyframes musicPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,107,157,.4);}50%{box-shadow:0 0 0 12px rgba(255,107,157,0);}}
+
+/* ══ PROGRESS BAR ══ */
+#progress-bar{position:fixed;top:0;left:0;right:0;height:3px;z-index:900;background:rgba(255,181,200,.15);}
+#progress-fill{height:100%;background:linear-gradient(90deg,var(--pink),var(--accent),#c084fc);width:0%;transition:width .6s ease;}
+
+/* ══ FIREWORK CANVAS ══ */
+#fw-canvas{position:fixed;inset:0;pointer-events:none;z-index:800;}
+
+/* ══ SECTIONS ══ */
+.section{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;z-index:2;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:80px;}
+.section.active{opacity:1;pointer-events:all;}
+.section.s-enter{animation:sectionIn .7s cubic-bezier(.22,1,.36,1) forwards;}
+.section.s-exit{animation:sectionOut .4s ease forwards;}
+@keyframes sectionIn{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+@keyframes sectionOut{from{opacity:1;}to{opacity:0;}}
+
+/* ══ S0: CINEMATIC INTRO ══ */
+#s0{background:radial-gradient(ellipse at 50% 60%,rgba(255,100,157,.18) 0%,transparent 70%),radial-gradient(ellipse at 20% 30%,rgba(180,120,255,.12) 0%,transparent 60%),#0a0510;flex-direction:column;gap:0;text-align:center;align-items:center;justify-content:center;}
+.intro-date{font-family:'Sarabun',sans-serif;font-size:.78rem;letter-spacing:.25em;color:rgba(255,181,200,.6);text-transform:uppercase;margin-bottom:28px;opacity:0;animation:fadeUp .8s ease .4s forwards;}
+.intro-title{font-family:'Prompt',sans-serif;font-size:2.8rem;font-weight:700;line-height:1.15;background:linear-gradient(135deg,#ffb5c8 0%,#fff 45%,#e0c8ff 80%,#ffb5c8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;opacity:0;animation:fadeUp .9s ease .8s forwards;}
+.intro-sub{font-family:'Sarabun',sans-serif;font-size:1.05rem;color:rgba(255,230,240,.7);margin-top:14px;opacity:0;animation:fadeUp .8s ease 1.3s forwards;}
+.intro-divider{width:60px;height:1.5px;background:linear-gradient(90deg,transparent,var(--pink),transparent);margin:24px auto;opacity:0;animation:fadeUp .6s ease 1.1s forwards;}
+.intro-btn{opacity:0;animation:fadeUp .8s ease 1.8s forwards;margin-top:8px;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+/* ══ ENVELOPE ══ */
+#env-wrap{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 50%,rgba(255,100,157,.25),#0a0510 70%);pointer-events:none;opacity:0;}
+#env-wrap.show{opacity:1;pointer-events:all;}
+.envelope{width:280px;height:200px;position:relative;cursor:pointer;transform-style:preserve-3d;perspective:800px;animation:envFloat 3s ease-in-out infinite;}
+@keyframes envFloat{0%,100%{transform:translateY(0) rotateX(2deg);}50%{transform:translateY(-12px) rotateX(-2deg);}}
+.env-body{width:100%;height:100%;border-radius:12px 12px 16px 16px;background:linear-gradient(160deg,#ffe0ee,#ffd0e8,#ffb5d0);box-shadow:0 20px 60px rgba(255,100,157,.35),0 4px 16px rgba(255,100,157,.2),inset 0 1px 0 rgba(255,255,255,.5);position:relative;overflow:hidden;}
+.env-body::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 14px,rgba(255,255,255,.08) 14px,rgba(255,255,255,.08) 15px);}
+.env-seal{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#ff6b9d,#ff8fab);display:flex;align-items:center;justify-content:center;font-size:1.4rem;box-shadow:0 4px 14px rgba(255,107,157,.4);animation:sealPulse 2s ease-in-out infinite;}
+@keyframes sealPulse{0%,100%{box-shadow:0 4px 14px rgba(255,107,157,.4);}50%{box-shadow:0 4px 24px rgba(255,107,157,.7);}}
+.env-flap{position:absolute;top:0;left:0;right:0;height:0;border-left:140px solid transparent;border-right:140px solid transparent;border-top:95px solid rgba(255,140,175,.65);transform-origin:top center;transition:transform .8s cubic-bezier(.34,1.56,.64,1);}
+.env-flap.open{transform:rotateX(180deg);}
+.env-letter-peek{position:absolute;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);width:220px;height:140px;background:linear-gradient(160deg,#fffaf6,#fff5f8);border-radius:8px 8px 0 0;box-shadow:0 -4px 20px rgba(255,100,157,.2);transition:transform 1s cubic-bezier(.34,1.3,.64,1) .3s;display:flex;align-items:center;justify-content:center;font-family:'Sarabun',sans-serif;font-size:.85rem;color:var(--sub);padding:14px;text-align:center;line-height:1.6;}
+.env-letter-peek.show{transform:translateX(-50%) translateY(40%);}
+.env-hint{position:absolute;bottom:-52px;left:50%;transform:translateX(-50%);font-family:'Sarabun',sans-serif;font-size:.82rem;color:rgba(255,181,200,.7);white-space:nowrap;animation:blink 1.5s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:.5;}50%{opacity:1;}}
+
+/* ══ SHARED BTN ══ */
+.cute-btn{font-family:'Mitr',sans-serif;font-size:1rem;font-weight:500;color:#fff;border:none;border-radius:50px;padding:16px 34px;cursor:pointer;background:linear-gradient(135deg,var(--pink2),var(--accent));box-shadow:0 6px 24px rgba(255,107,157,.35);transition:transform .15s,box-shadow .15s;position:relative;overflow:hidden;min-height:52px;display:inline-flex;align-items:center;justify-content:center;gap:8px;-webkit-user-select:none;user-select:none;}
+.cute-btn::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(255,255,255,.25),transparent 60%);pointer-events:none;}
+.cute-btn:active{transform:scale(.95);}
+.sec-nav{text-align:center;margin-top:28px;padding-bottom:calc(20px + var(--safe-b));}
+
+/* ══ S1: LETTER ══ */
+#s1{background:radial-gradient(circle at 15% 20%,rgba(255,181,200,.35) 0%,transparent 45%),radial-gradient(circle at 85% 75%,rgba(200,180,255,.25) 0%,transparent 50%),#0e0818;align-items:flex-start;}
+.letter-inner{max-width:540px;width:100%;margin:0 auto;padding:max(56px,var(--safe-t)) 20px 40px;}
+.letter-tag{text-align:center;margin-bottom:24px;}
+.badge{display:inline-flex;align-items:center;gap:6px;font-family:'Sarabun',sans-serif;font-style:italic;font-size:.8rem;color:rgba(255,181,200,.8);border:1.5px solid rgba(255,181,200,.3);padding:7px 18px;border-radius:30px;background:rgba(255,255,255,.06);backdrop-filter:blur(8px);}
+.heart-anim{display:block;font-size:1.8rem;text-align:center;margin:10px 0 0;animation:heartbeat 1.8s ease-in-out infinite;}
+@keyframes heartbeat{0%,100%{transform:scale(1);}14%{transform:scale(1.15);}28%{transform:scale(1);}42%{transform:scale(1.08);}70%{transform:scale(1);}}
+.letter-card{background:rgba(255,255,255,.07);backdrop-filter:blur(16px);border:1.5px solid rgba(255,181,200,.2);border-radius:20px;padding:32px 24px 26px;box-shadow:0 8px 40px rgba(255,107,157,.08),inset 0 1px 0 rgba(255,255,255,.1);position:relative;overflow:hidden;}
+.letter-card::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(transparent,transparent 34px,rgba(255,181,200,.06) 34px,rgba(255,181,200,.06) 35px);pointer-events:none;border-radius:20px;}
+#letter-text{font-family:'Sarabun',sans-serif;font-size:1.02rem;line-height:2.1rem;font-weight:300;position:relative;z-index:1;min-height:180px;color:rgba(255,230,240,.9);}
+.cursor{display:inline-block;width:2px;height:1.1em;background:var(--accent);vertical-align:text-bottom;margin-left:1px;animation:blinkC .7s step-end infinite;}
+@keyframes blinkC{0%,100%{opacity:1;}50%{opacity:0;}}
+.letter-sign{text-align:right;margin-top:16px;font-family:'Sarabun',sans-serif;font-style:italic;font-size:.95rem;color:rgba(255,181,200,.6);position:relative;z-index:1;}
+#next-btn{margin-top:28px;text-align:center;opacity:0;transform:translateY(10px);transition:opacity .8s,transform .8s;padding-bottom:calc(20px + var(--safe-b));}
+#next-btn.show{opacity:1;transform:translateY(0);}
+
+/* ══ S2: QUIZ ══ */
+#s2{background:linear-gradient(135deg,#0e0818 0%,#150b24 50%,#0a1018 100%);align-items:flex-start;}
+.quiz-inner{max-width:460px;width:100%;margin:0 auto;padding:max(56px,var(--safe-t)) 20px 40px;}
+.section-title{font-family:'Prompt',sans-serif;font-size:1.5rem;font-weight:600;text-align:center;margin-bottom:6px;color:#fff;}
+.section-sub{font-size:.82rem;color:rgba(255,181,200,.6);text-align:center;margin-bottom:24px;font-family:'Sarabun',sans-serif;}
+.q-progress{height:6px;background:rgba(255,181,200,.15);border-radius:10px;margin-bottom:24px;overflow:hidden;}
+.q-bar{height:100%;background:linear-gradient(90deg,var(--pink),var(--accent),#c084fc);border-radius:10px;transition:width .5s;}
+.quiz-card{background:rgba(255,255,255,.06);border-radius:20px;padding:28px 20px;box-shadow:0 8px 32px rgba(255,107,157,.08);border:1.5px solid rgba(255,181,200,.15);backdrop-filter:blur(12px);}
+.q-text{font-family:'Prompt',sans-serif;font-size:1.05rem;font-weight:500;color:#fff;text-align:center;line-height:1.55;margin-bottom:20px;}
+.q-emoji-big{font-size:2.4rem;display:block;margin-bottom:10px;}
+.q-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.q-opt{font-family:'Mitr',sans-serif;font-size:.85rem;padding:14px 10px;border-radius:14px;border:1.5px solid rgba(255,181,200,.3);background:rgba(255,255,255,.06);color:rgba(255,230,240,.9);cursor:pointer;text-align:center;line-height:1.35;transition:background .15s,border-color .15s,transform .1s;min-height:52px;display:flex;align-items:center;justify-content:center;-webkit-user-select:none;user-select:none;}
+.q-opt:active{transform:scale(.96);}
+.q-opt.correct{background:linear-gradient(135deg,rgba(100,230,160,.25),rgba(80,200,130,.2));border-color:#6dd698;color:#a0ffc0;}
+.q-opt.wrong{background:linear-gradient(135deg,rgba(255,100,140,.2),rgba(255,80,100,.15));border-color:#ff8090;color:#ffb0c0;}
+.q-opt:disabled{pointer-events:none;}
+.quiz-result{text-align:center;padding:12px 0;}
+.r-emoji{font-size:3.5rem;display:block;margin-bottom:12px;}
+.r-score{font-family:'Prompt',sans-serif;font-size:3rem;font-weight:700;background:linear-gradient(135deg,var(--pink),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.r-msg{font-size:.92rem;color:rgba(255,181,200,.7);margin-top:10px;line-height:1.7;font-family:'Sarabun',sans-serif;}
+
+/* ══ S3: TIMELINE ══ */
+#s3{background:linear-gradient(160deg,#0a0510 0%,#100818 60%,#080e18 100%);align-items:flex-start;}
+.tl-inner{max-width:560px;width:100%;margin:0 auto;padding:max(56px,var(--safe-t)) 20px 60px;}
+.tl-line{position:relative;padding-left:46px;margin-top:32px;}
+.tl-line::before{content:'';position:absolute;left:17px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--pink),#c084fc,var(--mint));border-radius:3px;opacity:.5;}
+.tl-item{position:relative;margin-bottom:28px;opacity:0;transform:translateX(-20px);transition:opacity .5s ease,transform .5s ease;}
+.tl-item.in{opacity:1;transform:translateX(0);}
+.tl-dot{position:absolute;left:-38px;top:12px;width:26px;height:26px;border-radius:50%;background:rgba(255,181,200,.08);border:1.5px solid rgba(255,181,200,.4);display:flex;align-items:center;justify-content:center;font-size:.85rem;box-shadow:0 0 12px rgba(255,107,157,.2);}
+.tl-card{background:rgba(255,255,255,.05);border-radius:16px;padding:18px 20px;border:1.5px solid rgba(255,181,200,.12);box-shadow:0 4px 20px rgba(0,0,0,.2);backdrop-filter:blur(8px);}
+.tl-date{font-size:.72rem;color:rgba(255,181,200,.5);letter-spacing:.06em;margin-bottom:4px;font-family:'Sarabun',sans-serif;}
+.tl-title{font-family:'Prompt',sans-serif;font-size:1rem;font-weight:500;color:rgba(255,230,240,.9);margin-bottom:5px;}
+.tl-desc{font-size:.85rem;color:rgba(255,181,200,.6);line-height:1.65;font-family:'Sarabun',sans-serif;}
+.tl-tag{display:inline-block;margin-top:8px;font-size:.7rem;padding:3px 10px;border-radius:20px;background:linear-gradient(135deg,rgba(255,181,200,.2),rgba(192,132,252,.2));color:rgba(255,181,200,.8);border:1px solid rgba(255,181,200,.2);}
+
+/* ══ S4: SWIPE GALLERY ══ */
+#s4{background:linear-gradient(135deg,#0a0510 0%,#120a18 50%,#080e18 100%);align-items:flex-start;}
+.gallery-inner{max-width:420px;width:100%;margin:0 auto;padding:max(56px,var(--safe-t)) 20px 80px;}
+.swipe-area{position:relative;height:320px;margin:20px auto 0;touch-action:pan-y;overflow:hidden;border-radius:24px;}
+.sw-card{position:absolute;inset:0;border-radius:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:grab;user-select:none;-webkit-user-select:none;overflow:hidden;will-change:transform;}
+.sw-card:active{cursor:grabbing;}
+.sw-card-bg{position:absolute;inset:0;border-radius:24px;background-size:cover;background-position:center;}
+.sw-card-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:24px;display:block;}
+.sw-img-overlay{position:absolute;inset:0;border-radius:24px;background:linear-gradient(180deg,rgba(0,0,0,.08) 0%,rgba(0,0,0,.55) 100%);z-index:1;}
+.sw-card-em{font-size:3.8rem;filter:drop-shadow(0 4px 8px rgba(0,0,0,.2));position:relative;z-index:2;}
+.sw-card-lbl{font-family:'Mali',cursive;font-size:1.1rem;color:#fff;margin-top:10px;position:relative;z-index:2;text-shadow:0 2px 8px rgba(0,0,0,.5);}
+.sw-card-cap{font-family:'Sarabun',sans-serif;font-size:.82rem;color:rgba(255,255,255,.8);margin-top:5px;position:relative;z-index:2;text-shadow:0 1px 4px rgba(0,0,0,.6);}
+.sw-msg-box{position:absolute;bottom:0;left:0;right:0;padding:20px;background:linear-gradient(0deg,rgba(0,0,0,.6),transparent);border-radius:0 0 24px 24px;z-index:2;transform:translateY(100%);transition:transform .4s cubic-bezier(.34,1.4,.64,1);}
+.sw-card:hover .sw-msg-box,.sw-card.peeked .sw-msg-box{transform:translateY(0);}
+.sw-msg{font-family:'Sarabun',sans-serif;font-size:.9rem;color:rgba(255,255,255,.9);line-height:1.5;}
+.sw-like-badge{position:absolute;top:18px;right:18px;z-index:3;width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#ff6b9d,#ff8fab);display:flex;align-items:center;justify-content:center;font-size:1.2rem;opacity:0;transform:scale(0) rotate(-20deg);transition:all .3s cubic-bezier(.34,1.6,.64,1);box-shadow:0 4px 16px rgba(255,107,157,.5);}
+.sw-nope-badge{position:absolute;top:18px;left:18px;z-index:3;padding:5px 12px;border-radius:8px;border:2px solid #ff4060;color:#ff4060;font-family:'Prompt',sans-serif;font-size:.85rem;font-weight:600;letter-spacing:.08em;opacity:0;transform:scale(0) rotate(15deg);transition:all .3s;}
+.sw-counter{text-align:center;margin-top:14px;font-family:'Sarabun',sans-serif;font-size:.8rem;color:rgba(255,181,200,.5);}
+.sw-counter span{color:var(--pink);font-weight:600;}
+.sw-hint{text-align:center;margin-top:8px;font-size:.75rem;color:rgba(255,181,200,.4);font-family:'Sarabun',sans-serif;}
+.sw-actions{display:flex;justify-content:center;gap:20px;margin-top:14px;}
+.sw-btn{width:52px;height:52px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.4rem;transition:transform .2s;-webkit-user-select:none;user-select:none;}
+.sw-btn:active{transform:scale(.88);}
+.sw-btn.dislike{background:rgba(255,60,80,.15);border:1.5px solid rgba(255,60,80,.3);}
+.sw-btn.like{background:rgba(255,107,157,.15);border:1.5px solid rgba(255,107,157,.3);}
+
+/* ══════════ S5: SCRATCH CARD ══════════ */
+#s5{
+  background:
+    radial-gradient(circle at 30% 20%,rgba(255,181,200,.2) 0%,transparent 50%),
+    radial-gradient(circle at 75% 80%,rgba(192,132,252,.15) 0%,transparent 50%),
+    #0a0510;
+  align-items:flex-start;
+}
+.scratch-inner{max-width:420px;width:100%;margin:0 auto;padding:max(52px,var(--safe-t)) 20px 80px;}
+.scratch-wrap{
+  position:relative;border-radius:24px;overflow:hidden;
+  box-shadow:0 16px 50px rgba(255,107,157,.2),0 4px 16px rgba(0,0,0,.3);
+  margin:20px 0 18px;
+}
+.scratch-reveal{
+  padding:32px 24px;
+  background:linear-gradient(135deg,#1a0d28,#2d0d3e);
+  border:1.5px solid rgba(255,181,200,.15);
+  border-radius:24px;
+  text-align:center;
+  min-height:260px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+}
+.scratch-msg-em{font-size:3.5rem;filter:drop-shadow(0 0 16px rgba(255,107,157,.5));}
+.scratch-msg-title{font-family:'Prompt',sans-serif;font-size:1.35rem;font-weight:600;line-height:1.4;background:linear-gradient(135deg,#ffb5c8,#fff,#e0c8ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.scratch-msg-body{font-family:'Sarabun',sans-serif;font-size:.92rem;color:rgba(255,200,220,.75);line-height:1.8;max-width:280px;}
+.scratch-msg-tag{font-size:.72rem;letter-spacing:.12em;color:rgba(255,181,200,.4);font-family:'Sarabun',sans-serif;margin-top:6px;}
+#scratch-canvas{
+  position:absolute;inset:0;border-radius:24px;
+  cursor:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><text y='26' font-size='26'>💅</text></svg>") 16 16, crosshair;
+  touch-action:none;
+}
+.scratch-hint{
+  text-align:center;font-family:'Sarabun',sans-serif;font-size:.82rem;
+  color:rgba(255,181,200,.5);
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.scratch-hint span{animation:blink 1.4s ease-in-out infinite;}
+.scratch-progress-wrap{margin:14px 0 0;background:rgba(255,181,200,.1);border-radius:10px;height:5px;overflow:hidden;}
+.scratch-progress{height:100%;background:linear-gradient(90deg,var(--pink),var(--accent));border-radius:10px;width:0%;transition:width .2s;}
+.scratch-pct{text-align:center;font-size:.7rem;color:rgba(255,181,200,.4);font-family:'Sarabun',sans-serif;margin-top:6px;}
+#scratch-done-msg{text-align:center;margin-top:12px;opacity:0;transform:translateY(8px);transition:opacity .6s,transform .6s;}
+#scratch-done-msg.show{opacity:1;transform:translateY(0);}
+
+/* ══════════ S6: COUNTDOWN ══════════ */
+#s6{
+  background:
+    radial-gradient(ellipse at 50% 30%,rgba(255,100,157,.15) 0%,transparent 60%),
+    radial-gradient(ellipse at 20% 80%,rgba(130,80,255,.1) 0%,transparent 55%),
+    #080510;
+  flex-direction:column;align-items:center;justify-content:center;
+}
+.cd-inner{max-width:380px;width:100%;padding:0 20px;text-align:center;}
+.cd-label{font-family:'Sarabun',sans-serif;font-size:.75rem;letter-spacing:.2em;color:rgba(255,181,200,.45);margin-bottom:14px;}
+.cd-emoji{font-size:3.5rem;display:block;margin-bottom:6px;animation:heartbeat 2s ease-in-out infinite;filter:drop-shadow(0 0 14px rgba(255,107,157,.4));}
+.cd-title{font-family:'Prompt',sans-serif;font-size:1.5rem;font-weight:600;color:#fff;margin-bottom:4px;}
+.cd-sub-title{font-family:'Sarabun',sans-serif;font-size:.88rem;color:rgba(255,181,200,.5);margin-bottom:28px;}
+/* flip cards */
+.cd-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px;}
+.cd-unit{display:flex;flex-direction:column;align-items:center;gap:6px;}
+.cd-flip{
+  width:100%;aspect-ratio:1/1.05;max-width:72px;
+  position:relative;border-radius:14px;overflow:hidden;
+  background:rgba(255,255,255,.05);border:1.5px solid rgba(255,181,200,.15);
+  box-shadow:0 6px 20px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.08);
+  display:flex;align-items:center;justify-content:center;
+}
+.cd-flip::after{content:'';position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(255,181,200,.1);pointer-events:none;}
+.cd-num{
+  font-family:'Prompt',sans-serif;font-size:1.9rem;font-weight:700;
+  background:linear-gradient(160deg,#fff 0%,#ffb5c8 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1;will-change:transform;
+  transition:transform .15s cubic-bezier(.34,1.56,.64,1);
+}
+.cd-num.flip-anim{animation:numFlip .35s cubic-bezier(.34,1.4,.64,1);}
+@keyframes numFlip{0%{transform:scaleY(0) rotateX(90deg);opacity:0;}60%{transform:scaleY(1.08) rotateX(-5deg);}100%{transform:scaleY(1) rotateX(0deg);opacity:1;}}
+.cd-unit-lbl{font-family:'Sarabun',sans-serif;font-size:.65rem;color:rgba(255,181,200,.45);letter-spacing:.06em;}
+/* anniversary date badge */
+.cd-anniv-card{
+  background:rgba(255,255,255,.05);backdrop-filter:blur(12px);
+  border:1.5px solid rgba(255,181,200,.15);border-radius:18px;
+  padding:18px 22px;margin-bottom:18px;
+  display:flex;align-items:center;gap:16px;text-align:left;
+}
+.cd-anniv-icon{font-size:2rem;flex-shrink:0;}
+.cd-anniv-date{font-family:'Prompt',sans-serif;font-size:1.05rem;font-weight:600;color:rgba(255,230,240,.9);}
+.cd-anniv-ago{font-family:'Sarabun',sans-serif;font-size:.8rem;color:rgba(255,181,200,.5);margin-top:2px;}
+/* days-together strip */
+.cd-together{
+  background:linear-gradient(135deg,rgba(255,107,157,.12),rgba(192,132,252,.08));
+  border:1.5px solid rgba(255,181,200,.15);border-radius:16px;
+  padding:16px 20px;margin-bottom:24px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.cd-tog-num{font-family:'Prompt',sans-serif;font-size:2rem;font-weight:700;background:linear-gradient(135deg,var(--pink),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.cd-tog-lbl{font-family:'Sarabun',sans-serif;font-size:.82rem;color:rgba(255,181,200,.55);text-align:right;line-height:1.5;}
+
+/* ══ S7: GRAND FINALE ══ */
+#s7{background:radial-gradient(ellipse at 50% 40%,rgba(255,80,140,.2) 0%,rgba(100,0,200,.1) 40%,#050310 70%),#050310;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;padding:max(50px,var(--safe-t)) 24px calc(90px + var(--safe-b)) 24px;}
+.finale-badge{font-family:'Sarabun',sans-serif;font-size:.75rem;letter-spacing:.2em;color:rgba(255,181,200,.5);margin-bottom:20px;opacity:0;animation:none;}
+.finale-badge.in{animation:fadeUp .7s ease forwards;}
+.finale-emoji{font-size:5rem;display:block;margin-bottom:16px;opacity:0;filter:drop-shadow(0 0 20px rgba(255,107,157,.5));}
+.finale-emoji.in{animation:emojiPop .8s cubic-bezier(.34,1.6,.64,1) .2s forwards;}
+@keyframes emojiPop{from{opacity:0;transform:scale(0) rotate(-20deg);}to{opacity:1;transform:scale(1) rotate(0deg);}}
+.finale-title{font-family:'Prompt',sans-serif;font-size:2rem;font-weight:700;line-height:1.3;background:linear-gradient(135deg,#ffb5c8,#fff,#e0c8ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px;opacity:0;}
+.finale-title.in{animation:fadeUp .8s ease .4s forwards;}
+.finale-sub{font-family:'Sarabun',sans-serif;font-size:1rem;color:rgba(255,230,240,.65);line-height:1.8;margin-bottom:28px;opacity:0;}
+.finale-sub.in{animation:fadeUp .8s ease .65s forwards;}
+.secret-box{max-width:320px;width:100%;background:rgba(255,255,255,.05);backdrop-filter:blur(16px);border:1.5px solid rgba(255,181,200,.15);border-radius:20px;padding:20px 20px;margin-bottom:24px;box-shadow:0 8px 40px rgba(255,107,157,.08);position:relative;overflow:visible;opacity:0;transform:scale(.9);}
+.secret-box.in{animation:boxReveal .9s cubic-bezier(.34,1.4,.64,1) .9s forwards;}
+@keyframes boxReveal{from{opacity:0;transform:scale(.85);}to{opacity:1;transform:scale(1);}}
+.secret-label{font-size:.7rem;letter-spacing:.15em;color:rgba(255,181,200,.4);font-family:'Sarabun',sans-serif;margin-bottom:10px;}
+.secret-text{font-family:'Sarabun',sans-serif;font-size:.88rem;line-height:1.7;color:rgba(255,230,240,.85);font-style:italic;}
+.secret-heart{font-size:1.5rem;display:block;margin-top:12px;animation:heartbeat 2s ease-in-out infinite;}
+.finale-btns{display:flex;flex-direction:column;gap:12px;align-items:center;opacity:0;}
+.finale-btns.in{animation:fadeUp .8s ease 1.2s forwards;}
+
+/* ══ BOTTOM NAV ══ */
+#bottom-nav{position:fixed;bottom:0;left:0;right:0;padding:10px 0 calc(10px + var(--safe-b));background:rgba(10,5,20,.88);backdrop-filter:blur(20px);border-top:1px solid rgba(255,181,200,.1);display:flex;justify-content:center;gap:0;z-index:500;}
+.bnav-btn{flex:1;max-width:56px;display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;cursor:pointer;padding:4px 4px;font-family:'Mitr',sans-serif;font-size:.55rem;color:rgba(255,181,200,.35);transition:color .15s,transform .12s;-webkit-user-select:none;user-select:none;}
+.bnav-btn:active{transform:scale(.85);}
+.bnav-btn .icon{font-size:1.15rem;display:block;}
+.bnav-btn.active{color:var(--accent);}
+.bnav-btn.active .icon{filter:drop-shadow(0 0 6px rgba(255,107,157,.6));}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"><div id="progress-fill"></div></div>
+<canvas id="fw-canvas"></canvas>
+<div id="starfield"></div>
+<div id="petals"></div>
+<button id="music-btn" aria-label="เพลง">🎵</button>
+
+<!-- ENVELOPE -->
+<div id="env-wrap">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:16px;">
+    <div class="envelope" id="envelope">
+      <div class="env-body">
+        <div class="env-flap" id="env-flap"></div>
+        <div class="env-seal" id="env-seal">💌</div>
+        <div class="env-letter-peek" id="env-peek">กำลังเปิดจดหมาย...<br>รักนะ 🌸</div>
+      </div>
+    </div>
+    <div class="env-hint" id="env-hint">แตะซองเพื่อเปิด 💌</div>
+  </div>
+</div>
+
+<!-- BOTTOM NAV (8 sections) -->
+<nav id="bottom-nav">
+  <button class="bnav-btn active" data-sec="0"><span class="icon">💫</span>เริ่ม</button>
+  <button class="bnav-btn" data-sec="1"><span class="icon">✉️</span>จดหมาย</button>
+  <button class="bnav-btn" data-sec="2"><span class="icon">🎀</span>ควิซ</button>
+  <button class="bnav-btn" data-sec="3"><span class="icon">🎞️</span>ไทม์ไลน์</button>
+  <button class="bnav-btn" data-sec="4"><span class="icon">📸</span>รูปภาพ</button>
+  <button class="bnav-btn" data-sec="5"><span class="icon">🔮</span>ขูด</button>
+  <button class="bnav-btn" data-sec="6"><span class="icon">⏳</span>นับวัน</button>
+  <button class="bnav-btn" data-sec="7"><span class="icon">🌟</span>ฟินาเล่</button>
+</nav>
+
+<!-- S0: INTRO -->
+<section id="s0" class="section active">
+  <div style="padding:0 28px;max-width:360px;width:100%;">
+    <div class="intro-date">3 Month Anniversary · Special 🌸</div>
+    <div class="intro-title">สำหรับ<br>วุ้นเส้นของแชมป์</div>
+    <div class="intro-divider"></div>
+    <div class="intro-sub">ครบ 3 เดือนแล้วนะ 💕<br>ขอบคุณที่เป็นคนนั้นเสมอ</div>
+    <div class="intro-btn">
+      <button class="cute-btn" id="open-letter-btn" style="margin-top:12px;">เปิดจดหมาย 💌</button>
+    </div>
+  </div>
+</section>
+
+<!-- S1: LETTER -->
+<section id="s1" class="section">
+  <div class="letter-inner">
+    <div class="letter-tag">
+      <span class="badge">💌 จดหมายรัก · ครบรอบ 3 เดือน</span>
+      <span class="heart-anim">🌸</span>
+    </div>
+    <div class="letter-card">
+      <p id="letter-text"><span class="cursor"></span></p>
+      <p class="letter-sign">— ด้วยรัก, แชมป์ 🌷</p>
+    </div>
+    <div id="next-btn">
+      <button class="cute-btn" onclick="goTo(2)">ทำควิซความรู้จักกัน 💬</button>
+    </div>
+  </div>
+</section>
+
+<!-- S2: QUIZ -->
+<section id="s2" class="section">
+  <div class="quiz-inner">
+    <div class="section-title">🎀 ทดสอบความรู้จัก</div>
+    <div class="section-sub">เธอรู้จักเราดีแค่ไหน? ลองตอบดูนะ~</div>
+    <div class="q-progress"><div class="q-bar" id="q-bar" style="width:0%"></div></div>
+    <div class="quiz-card" id="quiz-card"></div>
+    <div class="sec-nav"><button class="cute-btn" id="q-next" style="display:none" onclick="goTo(3)">ดูไทม์ไลน์ 🎞️</button></div>
+  </div>
+</section>
+
+<!-- S3: TIMELINE -->
+<section id="s3" class="section">
+  <div class="tl-inner">
+    <div class="section-title">🎞️ ไทม์ไลน์ของเรา</div>
+    <div class="section-sub" style="font-size:.8rem;color:rgba(255,181,200,.5);text-align:center;font-family:'Sarabun',sans-serif;margin-bottom:0;">ทุกช่วงเวลาที่ผ่านมาด้วยกัน</div>
+    <div class="tl-line" id="tl-line"></div>
+    <div class="sec-nav"><button class="cute-btn" onclick="goTo(4)">ดูรูปความทรงจำ 📸</button></div>
+  </div>
+</section>
+
+<!-- S4: SWIPE GALLERY -->
+<section id="s4" class="section">
+  <div class="gallery-inner">
+    <div class="section-title">📸 ความทรงจำ</div>
+    <div class="section-sub">ปัดซ้าย/ขวา หรือกดปุ่มด้านล่าง~</div>
+    <div class="swipe-area" id="swipe-area"></div>
+    <div class="sw-counter">รูปที่ <span id="sw-current">1</span> / <span id="sw-total">6</span></div>
+    <div class="sw-hint">← ปัดซ้าย · ปัดขวา →</div>
+    <div class="sw-actions">
+      <button class="sw-btn dislike" id="sw-left-btn">🙈</button>
+      <button class="sw-btn like" id="sw-right-btn">💕</button>
+    </div>
+    <div class="sec-nav" style="margin-top:10px;"><button class="cute-btn" onclick="goTo(5)">เปิดข้อความลับ 🔮</button></div>
+  </div>
+</section>
+
+<!-- S5: SCRATCH CARD -->
+<section id="s5" class="section">
+  <div class="scratch-inner">
+    <div class="section-title">🔮 ข้อความลับ</div>
+    <div class="section-sub">ขูดออกเพื่อดูข้อความที่ซ่อนไว้~</div>
+
+    <div class="scratch-wrap">
+      <!-- ข้อความที่ซ่อนอยู่ข้างล่าง -->
+      <div class="scratch-reveal" id="scratch-reveal">
+        <div class="scratch-msg-em">💌</div>
+        <div class="scratch-msg-title">ครบ 3 เดือนแล้ว<br>รักมากที่สุดในโลก</div>
+        <div class="scratch-msg-body">
+          แค่ 3 เดือน แต่รู้สึกเหมือนรู้จักกันมานานกว่านั้น
+          แค่ได้เห็นหน้าเธอก็หายเหนื่อยทุกที ❤️
+          <br><br>
+          ขอบคุณที่อยู่ตรงนี้เสมอนะ
+        </div>
+        <div class="scratch-msg-tag">✦ FOR YOU ONLY ✦</div>
+      </div>
+      <!-- canvas ขูดทับ -->
+      <canvas id="scratch-canvas"></canvas>
+    </div>
+
+    <div class="scratch-hint"><span>👆</span> ขูดที่นี่เพื่อเปิดเผยข้อความ</div>
+    <div class="scratch-progress-wrap"><div class="scratch-progress" id="scratch-progress"></div></div>
+    <div class="scratch-pct" id="scratch-pct">ขูดแล้ว 0%</div>
+
+    <div id="scratch-done-msg">
+      <div style="font-size:1.8rem;margin-bottom:8px;">🎉</div>
+      <div style="font-family:'Sarabun',sans-serif;font-size:.9rem;color:rgba(255,181,200,.7);">เปิดออกแล้ว! รักนะ 💕</div>
+    </div>
+
+    <div class="sec-nav">
+      <button class="cute-btn" onclick="goTo(6)">ดูนับวัน ⏳</button>
+    </div>
+  </div>
+</section>
+
+<!-- S6: COUNTDOWN -->
+<section id="s6" class="section">
+  <div class="cd-inner">
+    <div class="cd-label">✨ นับวันของเรา ✨</div>
+    <span class="cd-emoji">💕</span>
+    <div class="cd-title">อยู่ด้วยกันมาแล้ว</div>
+    <div class="cd-sub-title">และยังจะอยู่ด้วยกันต่อไป~</div>
+
+    <!-- days together -->
+    <div class="cd-together">
+      <div>
+        <div class="cd-tog-num" id="cd-days-together">---</div>
+        <div style="font-family:'Sarabun',sans-serif;font-size:.78rem;color:rgba(255,181,200,.5);margin-top:2px;">วันที่อยู่ด้วยกัน</div>
+      </div>
+      <div class="cd-tog-lbl">นับตั้งแต่<br>7 มีนาคม 2569 🌸</div>
+    </div>
+
+    <!-- anniversary date -->
+    <div class="cd-anniv-card">
+      <div class="cd-anniv-icon">🗓️</div>
+      <div>
+        <div class="cd-anniv-date" id="cd-anniv-date-txt">วันครบรอบของเรา</div>
+        <div class="cd-anniv-ago" id="cd-anniv-ago"></div>
+      </div>
+    </div>
+
+    <!-- countdown to NEXT anniversary -->
+    <div class="cd-label" style="margin-bottom:10px;">⏳ ครบรอบ 4 เดือนในอีก...</div>
+    <div class="cd-grid">
+      <div class="cd-unit">
+        <div class="cd-flip"><div class="cd-num" id="cd-d">00</div></div>
+        <div class="cd-unit-lbl">วัน</div>
+      </div>
+      <div class="cd-unit">
+        <div class="cd-flip"><div class="cd-num" id="cd-h">00</div></div>
+        <div class="cd-unit-lbl">ชั่วโมง</div>
+      </div>
+      <div class="cd-unit">
+        <div class="cd-flip"><div class="cd-num" id="cd-m">00</div></div>
+        <div class="cd-unit-lbl">นาที</div>
+      </div>
+      <div class="cd-unit">
+        <div class="cd-flip"><div class="cd-num" id="cd-s">00</div></div>
+        <div class="cd-unit-lbl">วินาที</div>
+      </div>
+    </div>
+
+    <div class="sec-nav"><button class="cute-btn" onclick="goTo(7)">ไปหน้าสุดท้าย 🌟</button></div>
+  </div>
+</section>
+
+<!-- S7: GRAND FINALE -->
+<section id="s7" class="section">
+  <div class="finale-badge" id="fn-badge">✨ HAPPY 3 MONTHS ✨</div>
+  <span class="finale-emoji" id="fn-emoji">🌸</span>
+  <div class="finale-title" id="fn-title">ครบ 3 เดือนแล้ว<br>มีความสุขมากที่สุด</div>
+  <div class="finale-sub" id="fn-sub">ขอบคุณที่ทำให้ทุกวัน<br>มีความหมายเสมอ ❤️</div>
+  <div class="secret-box" id="fn-secret">
+    <div class="secret-label">SECRET MESSAGE FOR YOU</div>
+    <div class="secret-text">
+      "แชมป์อยากบอกว่ารักวุ้นเส้นมากนะ แค่ 3 เดือนก็รู้แล้วว่าชีวิตดีขึ้นมากเพราะมีเธอ
+      <br><br>ขอบคุณที่อยู่ตรงนี้เสมอ ขอให้เราได้อยู่ด้วยกันอีกนานๆ นะ 🌙"
+    </div>
+    <span class="secret-heart">💕</span>
+  </div>
+  <div class="finale-btns" id="fn-btns">
+    <button class="cute-btn" onclick="triggerFW();launchHearts();">🎆 ยิงพลุฉลองกัน!</button>
+    <button class="cute-btn" style="background:linear-gradient(135deg,#8b5cf6,#c084fc);box-shadow:0 6px 24px rgba(192,132,252,.35);" onclick="goTo(0)">🌸 กลับไปดูใหม่</button>
+  </div>
+</section>
+
+<script>
+/* ══ STARFIELD ══ */
+(function(){
+  const sf=document.getElementById('starfield');
+  for(let i=0;i<90;i++){const s=document.createElement('span');s.className='star';const sz=.5+Math.random()*2.5;s.style.cssText=`left:${Math.random()*100}vw;top:${Math.random()*100}vh;width:${sz}px;height:${sz}px;animation-duration:${2+Math.random()*4}s;animation-delay:${Math.random()*6}s;opacity:${.1+Math.random()*.4};`;sf.appendChild(s);}
+  for(let i=0;i<8;i++){const m=document.createElement('div');m.className='meteor';m.style.cssText=`left:${Math.random()*100}vw;top:${-10+Math.random()*30}vh;animation-duration:${3+Math.random()*5}s;animation-delay:${Math.random()*20}s;opacity:.8;transform:rotate(${20+Math.random()*20}deg);`;sf.appendChild(m);}
+})();
+
+/* ══ PETALS ══ */
+(function(){
+  const c=document.getElementById('petals');
+  ['🌸','💕','✨','🌺','⭐','💫','🎀'].forEach(ic=>{for(let i=0;i<2;i++){const el=document.createElement('span');el.className='petal';el.textContent=ic;el.style.cssText=`left:${Math.random()*100}vw;animation-duration:${12+Math.random()*16}s;animation-delay:${Math.random()*25}s;font-size:${.7+Math.random()*.8}rem;`;c.appendChild(el);}});
+})();
+
+/* ══ NAV ══ */
+const SEC=['s0','s1','s2','s3','s4','s5','s6','s7'];
+const PROG=[0,14,28,42,57,71,85,100];
+let cur=0;
+function goTo(idx){
+  const old=document.getElementById(SEC[cur]);
+  old.classList.remove('active','s-enter');old.classList.add('s-exit');
+  setTimeout(()=>old.classList.remove('s-exit'),400);
+  cur=idx;
+  const el=document.getElementById(SEC[idx]);
+  el.classList.add('active','s-enter');el.scrollTop=0;
+  document.getElementById('progress-fill').style.width=PROG[idx]+'%';
+  document.querySelectorAll('.bnav-btn').forEach((b,i)=>b.classList.toggle('active',i===idx));
+  if(idx===1&&!letterGo)startLetter();
+  if(idx===3)observeTL();
+  if(idx===4){initGallery();}
+  if(idx===5)initScratch();
+  if(idx===6)startCountdown();
+  if(idx===7)animateFinale();
+}
+document.querySelectorAll('.bnav-btn').forEach(b=>b.addEventListener('click',()=>goTo(+b.dataset.sec)));
+
+/* ══ ENVELOPE ══ */
+let envOpened=false;
+document.getElementById('open-letter-btn').addEventListener('click',()=>document.getElementById('env-wrap').classList.add('show'));
+document.getElementById('envelope').addEventListener('click',openEnvelope);
+function openEnvelope(){
+  if(envOpened)return;envOpened=true;
+  document.getElementById('env-hint').style.opacity='0';
+  document.getElementById('env-flap').classList.add('open');
+  document.getElementById('env-seal').style.opacity='0';
+  setTimeout(()=>document.getElementById('env-peek').classList.add('show'),600);
+  setTimeout(()=>{
+    const w=document.getElementById('env-wrap');
+    w.style.opacity='0';w.style.transition='opacity .6s ease';
+    setTimeout(()=>{w.classList.remove('show');w.style.opacity='';w.style.transition='';envOpened=false;goTo(1);},700);
+  },2200);
+}
+
+/* ══ MUSIC ══ */
+let aCtx=null,playing=false,mNodes=[];
+document.getElementById('music-btn').addEventListener('click',function(){
+  playing=!playing;this.textContent=playing?'🔊':'🎵';this.classList.toggle('playing',playing);
+  if(playing){if(!aCtx)aCtx=new(window.AudioContext||window.webkitAudioContext)();playLoop();}
+  else{mNodes.forEach(n=>{try{n.stop();}catch(e){}});mNodes=[];}
+});
+function playLoop(){
+  if(!playing)return;
+  const master=aCtx.createGain();master.gain.value=.07;master.connect(aCtx.destination);
+  const notes=[523.25,587.33,659.25,783.99,880,783.99,659.25,587.33];let t=aCtx.currentTime;
+  notes.forEach((f,i)=>{const o=aCtx.createOscillator(),g=aCtx.createGain();o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(0,t+i*.85);g.gain.linearRampToValueAtTime(.38,t+i*.85+.05);g.gain.linearRampToValueAtTime(0,t+i*.85+.68);o.connect(g);g.connect(master);o.start(t+i*.85);o.stop(t+i*.85+.85);mNodes.push(o);});
+  setTimeout(playLoop,notes.length*850-150);
+}
+
+/* ══ TYPEWRITER ══ */
+const FULL="ถึง วุ้นเส้น...\n\nสุขสันต์วันครบรอบ 3 เดือนนะครับ 🌸\n\nแค่ 3 เดือน แต่รู้สึกเหมือนรู้จักกันมานานกว่านั้นมากเลย\nขอบคุณที่เข้ามาเป็นส่วนหนึ่งของทุกๆ วันของแชมป์นะ\n\nทุกครั้งที่เหนื่อย ทุกครั้งที่อยากคุยกับใครสักคน\nคนที่นึกถึงก่อนเลยคือเธอเสมอ\n\nไม่รู้ว่าเดือนข้างหน้าจะมีเรื่องราวอะไรรออีกบ้าง\nแต่รู้แน่ๆ ว่าอยากผ่านทุกเรื่องนั้นไปกับเธอ\n\nรักนะคะ...";
+let lIdx=0,letterGo=false;
+const lEl=document.getElementById('letter-text');
+function startLetter(){letterGo=true;stepL();}
+function stepL(){
+  if(lIdx<FULL.length){const ch=FULL.charAt(lIdx);lEl.innerHTML=FULL.slice(0,lIdx+1).replace(/\n/g,'<br>')+'<span class="cursor"></span>';lIdx++;setTimeout(stepL,['.','!','?',','].includes(ch)?190:44);}
+  else{lEl.innerHTML=FULL.replace(/\n/g,'<br>');setTimeout(()=>document.getElementById('next-btn').classList.add('show'),1400);}
+}
+
+/* ══ QUIZ ══ */
+const QS=[
+  {q:'🌈 วันแรกที่เราไปเที่ยวด้วยกัน บรรยากาศเป็นยังไง?',opts:['ฝนตกนิดหน่อย แต่สนุก','แดดร้อนมาก','กลางคืน โรแมนติก','ช่วงเช้า อากาศเย็น'],a:0},
+  {q:'☕ เมนูที่เราชอบสั่งด้วยกันคืออะไร?',opts:['ชาไทยนมสด','กาแฟเย็น','โกโก้เย็น','ชามะนาว'],a:2},
+  {q:'💬 ประโยคที่แชมป์พูดบ่อยที่สุด?',opts:['"หิวข้าวมั้ย"','"รักนะ"','"โอเคนะ"','"ไปไหนดี"'],a:1},
+  {q:'🎬 แนวหนังที่เราชอบดูด้วยกัน?',opts:['แอ็กชั่น','โรแมนติก','สยองขวัญ','แอนิเมชั่น'],a:1},
+  {q:'🌙 ช่วงเวลาที่มีความสุขที่สุดเมื่ออยู่ด้วยกัน?',opts:['ตอนกินข้าว','คุยก่อนนอน','ตอนไปเที่ยว','ทุกเวลา 💕'],a:3},
+];
+let qIdx=0,qScore=0,qDone=false;
+function renderQ(){const q=QS[qIdx];document.getElementById('q-bar').style.width=(qIdx/QS.length*100)+'%';document.getElementById('quiz-card').innerHTML=`<div class="q-text"><span class="q-emoji-big">${q.q.split(' ')[0]}</span>${q.q.replace(/^\S+\s/,'')}</div><div class="q-opts">${q.opts.map((o,i)=>`<button class="q-opt" onclick="ansQ(${i})">${o}</button>`).join('')}</div>`;}
+function ansQ(c){if(qDone)return;const btns=document.querySelectorAll('.q-opt');btns.forEach((b,i)=>{b.disabled=true;if(i===QS[qIdx].a)b.classList.add('correct');if(i===c&&c!==QS[qIdx].a)b.classList.add('wrong');});if(c===QS[qIdx].a){qScore++;popHeart();}setTimeout(()=>{qIdx++;if(qIdx<QS.length)renderQ();else showResult();},950);}
+function showResult(){qDone=true;const msgs=['ยังต้องทำการบ้านอีกนะ 😂','ดีขึ้นมาเยอะเลย~ 🌸','เก่งมากเลยนะ! 💕','แทบจะรู้ใจกัน ❤️','รู้ใจกัน 100%! 💘'];document.getElementById('quiz-card').innerHTML=`<div class="quiz-result"><span class="r-emoji">🎉</span><div class="r-score">${qScore}/${QS.length}</div><div class="r-msg">${msgs[Math.min(Math.floor(qScore/QS.length*4),4)]}<br>รักเสมอนะ ไม่ว่าจะได้กี่คะแนน 💕</div></div>`;document.getElementById('q-bar').style.width='100%';document.getElementById('q-next').style.display='inline-flex';miniFW();}
+renderQ();
+
+/* ══ TIMELINE ══ */
+const TL=[
+  {em:'💘',date:'วันแรกที่เจอกัน',title:'จุดเริ่มต้นของเรา',desc:'ไม่รู้ว่าวันนั้นชีวิตกำลังจะเปลี่ยนไปตลอดกาล เหมือนฟ้าส่งมาให้กันเลย',tag:'ความทรงจำ #1'},
+  {em:'🍜',date:'ครั้งแรกที่กินข้าวด้วยกัน',title:'มื้อแรกที่น่าจำ',desc:'นั่งกินด้วยกัน คุยกันไปเรื่อย แทบไม่รู้สึกตัวว่าเวลาผ่านไปนานแค่ไหน',tag:'อาหาร 🍚'},
+  {em:'🌅',date:'ทริปแรก',title:'ไปเที่ยวด้วยกันครั้งแรก',desc:'วันนั้นสนุกมาก เหนื่อยก็ยังยิ้มตลอด เพราะได้อยู่ด้วยกัน',tag:'เที่ยว ✈️'},
+  {em:'💐',date:'ครบ 1 เดือนแรก',title:'เดือนแรกที่น่าจดจำ',desc:'ทุกอย่างยังใหม่และแปลกใจ แต่ก็รู้สึกอบอุ่นมากตั้งแต่ต้นเลย',tag:'ครบ 1 เดือน 🌸'},
+  {em:'🌙',date:'คืนที่ดูดาวด้วยกัน',title:'ใต้แสงดาว',desc:'ดาวสวยมาก แต่ยังสวยไม่เท่าคนที่นั่งอยู่ข้างๆ เลย',tag:'โรแมนติก 🌟'},
+  {em:'⭐',date:'ครบ 3 เดือน',title:'ยังอยู่ตรงนี้เสมอ',desc:'3 เดือนผ่านไป แต่ความรู้สึกดีๆ ยังไม่เคยหายไปไหน ขอบคุณที่เป็นคนนั้นนะ',tag:'ครบรอบ 3 เดือน 🎉'},
+];
+const tlEl=document.getElementById('tl-line');
+TL.forEach(d=>{tlEl.innerHTML+=`<div class="tl-item"><div class="tl-dot">${d.em}</div><div class="tl-card"><div class="tl-date">${d.date}</div><div class="tl-title">${d.title}</div><div class="tl-desc">${d.desc}</div><span class="tl-tag">${d.tag}</span></div></div>`;});
+function observeTL(){const items=document.querySelectorAll('.tl-item'),root=document.getElementById('s3');if(!('IntersectionObserver' in window)){items.forEach(el=>el.classList.add('in'));return;}const obs=new IntersectionObserver(ents=>{ents.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'),i*80);obs.unobserve(e.target);}});},{threshold:.1,root});items.forEach(el=>obs.observe(el));}
+
+/* ══ SWIPE GALLERY ══ */
+const PD=[
+  // ใส่ลิงก์รูปใน img:'' ได้เลย ถ้าปล่อยว่างจะใช้ emoji แทน
+  {img:'https://res.cloudinary.com/dhzzbflvm/image/upload/v1777688003/wtuut2vtngchxi6hhu8q.jpg', em:'🌅', lbl:'ตอนเที่ยว',    cap:'วันนั้นสวยมาก',    msg:'ซ้อนท้ายลุยไปด้วยกันอีกนะ 🏍️',       bg:'linear-gradient(135deg,#ffd4e8,#ff8fab)'},
+  {img:'', em:'🍜', lbl:'กินข้าว',      cap:'อร่อยทุกมื้อ',    msg:'กินอะไรก็อร่อยถ้ามีเธออยู่ด้วย 🥢',  bg:'linear-gradient(135deg,#ffe8a0,#ffb830)'},
+  {img:'', em:'🌊', lbl:'ทะเล',         cap:'ลมแรงวันนั้น',    msg:'อยากพาไปอีก ทะเลกับเธอดีที่สุด 🌊',  bg:'linear-gradient(135deg,#80d8ff,#0288d1)'},
+  {img:'', em:'🌸', lbl:'วันสบาย',      cap:'ยิ้มตลอดเลยนะ',   msg:'รักรอยยิ้มนี้ที่สุด 😊',              bg:'linear-gradient(135deg,#f8bbd0,#ec407a)'},
+  {img:'', em:'💐', lbl:'ครบ 3 เดือน', cap:'วันพิเศษของเรา',   msg:'ขอให้มีความสุขทุกเดือน ทุกปี 🌸',    bg:'linear-gradient(135deg,#e1bee7,#9c27b0)'},
+  {img:'', em:'🌙', lbl:'คืนดาว',       cap:'ดูดาวด้วยกัน',    msg:'ดาวสวยแต่ไม่สวยเท่าเธอหรอก ⭐',      bg:'linear-gradient(135deg,#283593,#5c6bc0)'},
+];
+let swCards=[],swCur=0,swDragging=false,swStartX=0,swDeltaX=0,galleryInited=false;
+function initGallery(){
+  if(galleryInited)return;galleryInited=true;
+  const area=document.getElementById('swipe-area');area.innerHTML='';swCards=[];
+  document.getElementById('sw-total').textContent=PD.length;
+  PD.slice().reverse().forEach((d,ri)=>{
+    const i=PD.length-1-ri,card=document.createElement('div');
+    card.className='sw-card';card.dataset.idx=i;
+    card.style.cssText=`transform:translateX(0) rotate(0deg) scale(${1-(PD.length-1-ri)*.03});z-index:${ri+1};box-shadow:0 ${8+(PD.length-1-ri)*4}px ${30+(PD.length-1-ri)*10}px rgba(0,0,0,.35);`;
+    const hasImg = d.img && d.img.trim() !== '';
+    const bgStyle = hasImg ? `background:${d.bg};` : `background:${d.bg};`;
+    card.innerHTML=`
+      <div class="sw-card-bg" style="${bgStyle}"></div>
+      ${hasImg ? `<img class="sw-card-img" src="${d.img}" alt="${d.lbl}" crossorigin="anonymous" onerror="this.style.display='none'">` : ''}
+      ${hasImg ? '<div class="sw-img-overlay"></div>' : ''}
+      <div class="sw-like-badge" id="slk${i}">💕</div>
+      <div class="sw-nope-badge" id="snp${i}">SKIP</div>
+      ${!hasImg ? `<span class="sw-card-em">${d.em}</span>` : ''}
+      <div class="sw-card-lbl">${d.lbl}</div>
+      <div class="sw-card-cap">${d.cap}</div>
+      <div class="sw-msg-box"><div class="sw-msg">${d.msg}</div></div>
+    `;
+    area.appendChild(card);swCards.unshift(card);
+  });
+  updateSwCounter();setupSwipe();
+}
+function updateSwCounter(){document.getElementById('sw-current').textContent=Math.min(swCur+1,PD.length);}
+function setupSwipe(){
+  const area=document.getElementById('swipe-area');
+  area.addEventListener('touchstart',onTouchStart,{passive:true});
+  area.addEventListener('touchmove',onTouchMove,{passive:true});
+  area.addEventListener('touchend',onTouchEnd);
+  document.getElementById('sw-left-btn').onclick=()=>animateSwipe(-1);
+  document.getElementById('sw-right-btn').onclick=()=>animateSwipe(1);
+}
+function getTopCard(){for(let i=swCur;i<swCards.length;i++){if(!swCards[i].dataset.gone)return swCards[i];}return null;}
+function onTouchStart(e){const c=getTopCard();if(!c)return;swDragging=true;swStartX=e.touches[0].clientX;swDeltaX=0;c.style.transition='none';}
+function onTouchMove(e){if(!swDragging)return;const c=getTopCard();if(!c)return;swDeltaX=e.touches[0].clientX-swStartX;const rot=swDeltaX*.08;c.style.transform=`translateX(${swDeltaX}px) rotate(${rot}deg) scale(1)`;const lk=c.querySelector('[id^="slk"]'),np=c.querySelector('[id^="snp"]');if(swDeltaX>40){lk.style.opacity=Math.min((swDeltaX-40)/60,1);lk.style.transform=`scale(${Math.min(1,(swDeltaX-40)/60)}) rotate(-20deg)`;np.style.opacity='0';}else if(swDeltaX<-40){np.style.opacity=Math.min((-swDeltaX-40)/60,1);np.style.transform=`scale(${Math.min(1,(-swDeltaX-40)/60)}) rotate(15deg)`;lk.style.opacity='0';}else{lk.style.opacity='0';np.style.opacity='0';}}
+function onTouchEnd(){if(!swDragging)return;swDragging=false;const c=getTopCard();if(!c)return;if(Math.abs(swDeltaX)>90)animateSwipe(swDeltaX>0?1:-1);else{c.style.transition='transform .4s cubic-bezier(.34,1.56,.64,1)';c.style.transform='translateX(0) rotate(0deg) scale(1)';const lk=c.querySelector('[id^="slk"]'),np=c.querySelector('[id^="snp"]');lk.style.opacity='0';np.style.opacity='0';}}
+function animateSwipe(dir){const c=getTopCard();if(!c)return;c.dataset.gone='1';const tx=dir*window.innerWidth*1.3,rot=dir*25;c.style.transition='transform .45s cubic-bezier(.2,.8,.6,1),opacity .45s';c.style.transform=`translateX(${tx}px) rotate(${rot}deg) scale(1)`;c.style.opacity='0';swCur++;updateSwCounter();setTimeout(()=>{const rem=swCards.filter(sc=>!sc.dataset.gone);rem.forEach((sc,i)=>{sc.style.transition='transform .3s ease';sc.style.transform=`translateX(0) rotate(0deg) scale(${1-i*.03})`;sc.style.zIndex=rem.length-i;});if(dir>0)popHeart();},200);}
+
+/* ══════════════════════════════════
+   SCRATCH CARD
+══════════════════════════════════ */
+let scratchInited=false,scratchDone=false;
+function initScratch(){
+  if(scratchInited)return;scratchInited=true;
+  const revEl=document.getElementById('scratch-reveal');
+  const canvas=document.getElementById('scratch-canvas');
+  const W=revEl.offsetWidth,H=revEl.offsetHeight;
+  canvas.width=W;canvas.height=H;
+  const ctx=canvas.getContext('2d');
+
+  // Silver foil gradient overlay
+  const grad=ctx.createLinearGradient(0,0,W,H);
+  grad.addColorStop(0,'#2a1435');
+  grad.addColorStop(.3,'#3d1f50');
+  grad.addColorStop(.6,'#2a1435');
+  grad.addColorStop(1,'#1a0d28');
+  ctx.fillStyle=grad;ctx.fillRect(0,0,W,H);
+
+  // sparkle pattern
+  ctx.fillStyle='rgba(255,181,200,.04)';
+  for(let i=0;i<80;i++){ctx.beginPath();ctx.arc(Math.random()*W,Math.random()*H,1+Math.random()*2,0,Math.PI*2);ctx.fill();}
+
+  // instruction text
+  ctx.fillStyle='rgba(255,181,200,.55)';
+  ctx.font=`bold ${W*.065}px 'Prompt', sans-serif`;
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText('✨ ขูดที่นี่ ✨',W/2,H*.38);
+  ctx.font=`${W*.05}px 'Sarabun', sans-serif`;
+  ctx.fillStyle='rgba(255,181,200,.35)';
+  ctx.fillText('ใช้นิ้วขูดเพื่อเปิดข้อความ',W/2,H*.55);
+  ctx.fillText('💝',W/2,H*.72);
+
+  ctx.globalCompositeOperation='destination-out';
+  let isScratching=false,totalPx=W*H,scratchedPx=0;
+
+  function scratch(x,y){
+    ctx.beginPath();
+    // larger radius on mobile
+    const r=Math.min(W,H)*.1;
+    ctx.arc(x,y,r,0,Math.PI*2);
+    ctx.fill();
+    checkProgress();
+  }
+
+  function checkProgress(){
+    if(scratchDone)return;
+    const sample=ctx.getImageData(0,0,W,H).data;
+    let cleared=0;
+    for(let i=3;i<sample.length;i+=4){if(sample[i]<128)cleared++;}
+    const pct=Math.min(100,Math.round(cleared/(totalPx)*100));
+    document.getElementById('scratch-progress').style.width=pct+'%';
+    document.getElementById('scratch-pct').textContent=`ขูดแล้ว ${pct}%`;
+    if(pct>60&&!scratchDone){
+      scratchDone=true;
+      // clear all
+      setTimeout(()=>{
+        ctx.globalCompositeOperation='destination-out';
+        ctx.fillStyle='rgba(0,0,0,1)';
+        ctx.fillRect(0,0,W,H);
+        canvas.style.transition='opacity .8s';canvas.style.opacity='0';
+        document.getElementById('scratch-done-msg').classList.add('show');
+        launchHearts();miniFW();
+        document.getElementById('scratch-progress').style.width='100%';
+        document.getElementById('scratch-pct').textContent='ขูดแล้ว 100% 💕';
+      },400);
+    }
+  }
+
+  // touch
+  canvas.addEventListener('touchstart',e=>{e.preventDefault();isScratching=true;const r=canvas.getBoundingClientRect();scratch(e.touches[0].clientX-r.left,e.touches[0].clientY-r.top);},{passive:false});
+  canvas.addEventListener('touchmove',e=>{e.preventDefault();if(!isScratching)return;const r=canvas.getBoundingClientRect();scratch(e.touches[0].clientX-r.left,e.touches[0].clientY-r.top);},{passive:false});
+  canvas.addEventListener('touchend',()=>isScratching=false);
+  // mouse
+  canvas.addEventListener('mousedown',e=>{isScratching=true;const r=canvas.getBoundingClientRect();scratch(e.clientX-r.left,e.clientY-r.top);});
+  canvas.addEventListener('mousemove',e=>{if(!isScratching)return;const r=canvas.getBoundingClientRect();scratch(e.clientX-r.left,e.clientY-r.top);});
+  canvas.addEventListener('mouseup',()=>isScratching=false);
+}
+
+/* ══════════════════════════════════
+   COUNTDOWN TIMER
+══════════════════════════════════ */
+// *** แก้ตรงนี้: ใส่วันเริ่มต้นที่อยู่ด้วยกัน (ปี-เดือน-วัน) ***
+const FIRST_DAY = new Date('2026-03-07T00:00:00');
+// *** วันครบรอบ 3 เดือน (7 มิถุนายน 2569) ***
+const ANNIV_MONTH = 6; // มิถุนายน
+const ANNIV_DAY   = 7;
+
+let cdTimer=null,prevVals={d:'',h:'',m:'',s:''};
+function startCountdown(){
+  if(cdTimer)clearInterval(cdTimer);
+  tickCountdown();cdTimer=setInterval(tickCountdown,1000);
+}
+function tickCountdown(){
+  const now=new Date();
+
+  // days together
+  const dTog=Math.floor((now-FIRST_DAY)/(864e5));
+  document.getElementById('cd-days-together').textContent=dTog.toLocaleString('th-TH');
+
+  // anniversary date display
+  const annivThisYear=new Date(now.getFullYear(),ANNIV_MONTH-1,ANNIV_DAY);
+  const agoMs=now-annivThisYear;
+  const agoD=Math.abs(Math.floor(agoMs/864e5));
+  const months=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+  document.getElementById('cd-anniv-date-txt').textContent=`${ANNIV_DAY} ${months[ANNIV_MONTH-1]} ${annivThisYear.getFullYear()+543}`;
+  if(agoMs>0) document.getElementById('cd-anniv-ago').textContent=`ผ่านมาแล้ว ${agoD} วัน 🌸`;
+  else document.getElementById('cd-anniv-ago').textContent=`อีก ${agoD} วัน ก็ครบรอบ! 🎉`;
+
+  // countdown to NEXT monthly anniversary
+  const nextAnniv=new Date(now.getFullYear(),ANNIV_MONTH-1,ANNIV_DAY);
+  if(nextAnniv<=now) nextAnniv.setMonth(nextAnniv.getMonth()+1);
+  const diff=nextAnniv-now;
+  const dd=String(Math.floor(diff/864e5)).padStart(2,'0');
+  const hh=String(Math.floor((diff%864e5)/36e5)).padStart(2,'0');
+  const mm=String(Math.floor((diff%36e5)/6e4)).padStart(2,'0');
+  const ss=String(Math.floor((diff%6e4)/1e3)).padStart(2,'0');
+  setFlip('cd-d',dd);setFlip('cd-h',hh);setFlip('cd-m',mm);setFlip('cd-s',ss);
+}
+function setFlip(id,val){
+  const el=document.getElementById(id);
+  if(el.textContent!==val){el.textContent=val;el.classList.remove('flip-anim');void el.offsetWidth;el.classList.add('flip-anim');}
+}
+
+/* ══ GRAND FINALE ══ */
+function animateFinale(){
+  const els=['fn-badge','fn-emoji','fn-title','fn-sub','fn-secret','fn-btns'];
+  els.forEach(id=>document.getElementById(id).classList.remove('in'));
+  setTimeout(()=>{triggerFW();els.forEach((id,i)=>setTimeout(()=>document.getElementById(id).classList.add('in'),i*180));launchHearts();},300);
+}
+
+/* ══ FIREWORKS ══ */
+const fc=document.getElementById('fw-canvas'),fctx=fc.getContext('2d');
+function resizeFW(){fc.width=window.innerWidth;fc.height=window.innerHeight;}resizeFW();window.addEventListener('resize',resizeFW);
+let fps=[];const FC=['#ffb5c8','#ff6b9d','#ffd6c0','#fff4b2','#c8e8ff','#e0c8ff','#b8f0d0','#ffffff'];
+function spawnFW(x,y,n=55){for(let i=0;i<n;i++){const a=Math.random()*Math.PI*2,s=2+Math.random()*5.5;fps.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,life:1,dec:.013+Math.random()*.012,r:2.5+Math.random()*2.5,col:FC[Math.floor(Math.random()*FC.length)]});}}
+function triggerFW(){const W=innerWidth,H=innerHeight;for(let i=0;i<7;i++)setTimeout(()=>spawnFW(W*.1+Math.random()*W*.8,H*.1+Math.random()*H*.5),i*200);}
+function miniFW(){spawnFW(innerWidth*.3,innerHeight*.4,22);spawnFW(innerWidth*.7,innerHeight*.35,22);spawnFW(innerWidth*.5,innerHeight*.55,18);}
+(function loop(){fctx.clearRect(0,0,fc.width,fc.height);fps=fps.filter(p=>p.life>0);fps.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.06;p.vx*=.98;p.life-=p.dec;fctx.globalAlpha=Math.max(0,p.life);fctx.fillStyle=p.col;fctx.beginPath();fctx.arc(p.x,p.y,p.r,0,Math.PI*2);fctx.fill();});fctx.globalAlpha=1;requestAnimationFrame(loop);})();
+
+/* ══ HEARTS ══ */
+function popHeart(){const el=document.createElement('span');el.textContent=['💕','💗','💖','💝','✨'][Math.floor(Math.random()*5)];el.style.cssText=`position:fixed;left:${20+Math.random()*60}%;top:${30+Math.random()*30}%;font-size:${1.4+Math.random()*.8}rem;pointer-events:none;z-index:900;animation:petalDrift 2.5s ease forwards;`;document.body.appendChild(el);setTimeout(()=>el.remove(),2600);}
+function launchHearts(){for(let i=0;i<12;i++)setTimeout(popHeart,i*80);}
+</script>
+</body>
+</html>
